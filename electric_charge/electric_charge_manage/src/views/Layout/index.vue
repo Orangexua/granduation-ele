@@ -9,7 +9,7 @@
         <h4 @click="logout" style="cursor: pointer;margin-right:10px;color:#E5EAE9">{{nowDate}}  {{nowTime}}  {{nowWeek}}|退出登录</h4>
       </el-header>
       <el-container>
-        <el-aside width="200px">
+        <el-aside width="220px">
           <Menu />
         </el-aside>
         <el-main>
@@ -83,7 +83,7 @@ export default {
 }
 
 .el-header {
-  background-color: #1C2E3A;
+  background-color: #409EFF;
   color: #fff;
   display: flex;
   align-items: center;
