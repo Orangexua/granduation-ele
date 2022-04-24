@@ -6,7 +6,7 @@
         <h5 @click="logout" style="cursor: pointer">{{result}}退出登录</h5>
       </el-header>
       <el-container>
-        <el-aside width="200px">
+        <el-aside width="220px">
           <Menu />
         </el-aside>
         <el-main>
@@ -73,7 +73,7 @@ export default {
 }
 
 .el-header {
-  background-color: #04344D;
+  background-color: #409EFF;
   color: #fff;
   display: flex;
   align-items: center;
