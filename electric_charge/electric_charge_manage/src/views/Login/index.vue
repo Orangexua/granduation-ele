@@ -1,7 +1,19 @@
 <template>
   <div class="login">
-    <el-card style="width: 40vw; height: 35vw" class="box-card">
-      <h3 style="text-align: center; margin-bottom: 50px">电费管理系统</h3>
+    <el-card style="width: 28vw; height: 30vw" class="box-card">
+      <h3
+        style="
+          font-size: 3vw;
+          color: #0084ff;
+          text-align: center;
+          display: block;
+          margin-top: 30px;
+        "
+      >
+        电管
+      </h3>
+      <div class="tip">注册电管，发现更大的世界</div>
+      <div class="con"></div>
       <el-form
         :model="ruleForm"
         status-icon
@@ -10,14 +22,14 @@
         label-width="100px"
         class="demo-ruleForm"
       >
-        <el-form-item style="width: 500px" label="手机号" prop="phone">
+        <el-form-item style="width: 25vw" label="手机号" prop="phone">
           <el-input
             type="text"
             v-model="ruleForm.phone"
             autocomplete="off"
           ></el-input>
         </el-form-item>
-        <el-form-item style="width: 500px" label="密码" prop="password">
+        <el-form-item style="width: 25vw" label="密码" prop="password">
           <el-input
             type="password"
             v-model="ruleForm.password"
@@ -37,14 +49,14 @@
           </el-form-item>
         </div>
         <div v-else>
-          <el-form-item style="width: 500px" label="用户昵称" prop="username">
+          <el-form-item style="width: 30vw" label="用户昵称" prop="username">
             <el-input
               type="text"
               v-model="ruleForm.username"
               autocomplete="off"
             ></el-input>
           </el-form-item>
-          <el-form-item style="width: 500px" label="小区" prop="house">
+          <el-form-item style="width: 30vw" label="小区" prop="house">
             <el-select v-model="ruleForm.house">
               <el-option
                 v-for="item in houseList"
@@ -170,5 +182,17 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  .tip {
+    color: #0084ff;
+    text-align: center;
+    font-size: 22px;
+    margin-top: 15px;
+  }
+  .con {
+    width: 25vw;
+    height: 24px;
+    border-bottom: 1px solid #ebebeb;
+    margin-bottom: 30px;
+  }
 }
 </style>
