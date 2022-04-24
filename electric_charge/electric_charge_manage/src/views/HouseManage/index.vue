@@ -11,22 +11,22 @@
     <el-button type="primary" @click="openModal">新增房源</el-button>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="id" label="id" width="180"> </el-table-column>
-      <el-table-column prop="name" label="小区名字"> </el-table-column>
+      <el-table-column prop="name" label="小区名称"> </el-table-column>
       <el-table-column prop="unit" label="小区单元数"> </el-table-column>
       <el-table-column prop="floor" label="小区楼层数"> </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-link
+          <el-button
             style="margin-right: 10px"
             @click="handleClick(scope.row)"
             type="primary"
             size="small"
           >
             编辑
-          </el-link>
-          <el-link type="danger" size="small" @click="handleDel(scope.row.id)">
+          </el-button>
+          <el-button type="danger" size="small" @click="handleDel(scope.row.id)">
             删除
-          </el-link>
+          </el-button>
         </template>
       </el-table-column>
     </el-table>

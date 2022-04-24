@@ -5,7 +5,7 @@
         <div class="div1" style="width: 200px;height: 100%;">
           <img src="../../assets/1.jpg" alt="handsome" style="width: 100%; height: 100%">
         </div> 
-        <h1 style="font-size:30px;color:#E5EAE9">电费管理系统</h1>
+        <h1 style="font-size:30px;color:#E5EAE9">电力计量计费管理系统</h1>
         <h4 @click="logout" style="cursor: pointer;margin-right:10px;color:#E5EAE9">{{nowDate}}  {{nowTime}}  {{nowWeek}}|退出登录</h4>
       </el-header>
       <el-container>
@@ -75,15 +75,13 @@ export default {
 }
 }
 </script>
-
 <style lang="less" scoped>
 .layout {
   width: 100vw;
   height: 100vh;
 }
-
 .el-header {
-  background-color: #409EFF;
+  background-color: #162D3A;
   color: #fff;
   display: flex;
   align-items: center;

@@ -15,6 +15,7 @@
         ></el-progress>
       </div>
     </div>
+    
     <el-table v-else :data="tableData" style="width: 100%">
       <el-table-column prop="id" label="id"> </el-table-column>
       <el-table-column prop="name" label="设备名称"></el-table-column>
