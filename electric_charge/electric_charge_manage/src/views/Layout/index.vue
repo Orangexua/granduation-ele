@@ -2,8 +2,11 @@
   <div class="layout">
     <el-container style="width: 100%; height: 100%">
       <el-header style="display: flex; justify-content: space-between">
-        <h3>电费管理系统</h3>
-        <h5 @click="logout" style="cursor: pointer">{{result}}退出登录</h5>
+        <div class="div1" style="width: 200px;height: 100%;">
+          <img src="../../assets/1.jpg" alt="handsome" style="width: 100%; height: 100%">
+        </div> 
+        <h1 style="font-size:30px;color:#E5EAE9">电费管理系统</h1>
+        <h4 @click="logout" style="cursor: pointer;margin-right:10px;color:#E5EAE9">{{nowDate}}  {{nowTime}}  {{nowWeek}}|退出登录</h4>
       </el-header>
       <el-container>
         <el-aside width="200px">
@@ -26,17 +29,18 @@ export default {
     Menu
   },
   data(){
-   //接收当前时间
-			const currentDate = this.getDate({
-				format: true
-			})
-			//双向绑定
-			return {
-				result: currentDate,
-			};
+   return {    
+		timer: null,    
+		nowWeek: '',    
+		nowDate: '',    
+		nowTime: ''  
+	  }
   },
   mounted() {
     this.getUser();
+    this.timer = setInterval(() => {    
+	 this.setNowTimes()  
+},10)
   },
   methods: {
     getUser() {
@@ -52,16 +56,22 @@ export default {
       removeStore("userInfo");
       this.$router.push("/login");
     },
-   // 获取当前时间
-			getDate() {
-				const date = new Date();
-				let year = date.getFullYear();
-				let month = date.getMonth() + 1;
-				let day = date.getDate();
-				month = month < 10 ? "0" + month : month; //月小于10，加0
-				day = day < 10 ? "0" + day : day; //day小于10，加0
-				return `${year}-${month}-${day}`;
-			}
+    setNowTimes () {  
+		//获取当前时间
+		let myDate = new Date()  
+		let wk = myDate.getDay()  
+		let yy = String(myDate.getFullYear())  
+		let mm = myDate.getMonth() + 1  
+		let dd = String(myDate.getDate() < 10 ? '0' + myDate.getDate() : myDate.getDate())  
+		let hou = String(myDate.getHours() < 10 ? '0' + myDate.getHours() : myDate.getHours())  
+		let min = String(myDate.getMinutes() < 10 ? '0' + myDate.getMinutes() : myDate.getMinutes())  
+		let sec = String(myDate.getSeconds() < 10 ? '0' + myDate.getSeconds() : myDate.getSeconds())  
+		let weeks = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
+		let week = weeks[wk]  
+		this.nowDate = yy + '-' + mm + '-' + dd  
+		this.nowTime = hou + ':' + min + ':' + sec  
+		this.nowWeek = week
+	},
 }
 }
 </script>
@@ -73,10 +83,11 @@ export default {
 }
 
 .el-header {
-  background-color: #04344D;
+  background-color: #1C2E3A;
   color: #fff;
   display: flex;
   align-items: center;
+  padding: 0 0;
 }
 .time {
   height: 20px;

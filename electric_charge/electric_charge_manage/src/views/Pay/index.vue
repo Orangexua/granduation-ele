@@ -27,14 +27,14 @@
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-link
-            style="margin-right: 10px"
+          <el-button
+            style="margin-right: 20px"
             @click="handleClick(scope.row)"
             type="primary"
             size="small"
           >
             缴费
-          </el-link>
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -73,7 +73,7 @@
         <el-button type="primary" @click="handleSubmit"> 确 定 </el-button>
       </div>
     </el-dialog>
-    <div style="display: flex; flex-direction: row-reverse">
+    <div style="float:right;margin-top:10px">
       <el-pagination
         layout="prev, pager, next"
         @current-change="pageChange"
