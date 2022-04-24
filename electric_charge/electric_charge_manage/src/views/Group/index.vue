@@ -24,17 +24,17 @@
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-link
-            style="margin-right: 10px"
+          <el-button
+            style="margin-right:2px"
             @click="handleClick(scope.row)"
             type="primary"
             size="small"
           >
             编辑
-          </el-link>
-          <el-link type="danger" size="small" @click="handleDel(scope.row.id)">
+          </el-button>
+          <el-button type="danger" size="small" @click="handleDel(scope.row.id)">
             删除
-          </el-link>
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
