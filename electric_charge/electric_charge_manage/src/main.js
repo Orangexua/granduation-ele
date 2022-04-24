@@ -6,6 +6,10 @@ import ElementUI from "element-ui";
 import moment from "moment";
 import "./style/common.css";
 import "element-ui/lib/theme-chalk/index.css";
+import * as echarts from 'echarts';
+
+Vue.prototype.$echarts = echarts;
+
 
 Vue.config.productionTip = false;
 Vue.filter("formatDateTime", (date) => {

@@ -24,6 +24,18 @@ export const routerMap = [
     name: "HouseManage",
     meta: { title: "房源管理" },
     component: () => import("../views/HouseManage")
+  },
+  {
+    path: "/totalElec",
+    name: "TotalElec",
+    meta: { title: "电表计量"},
+    component: () => import("../views/TotalElec")
+  },
+  {
+    path: "/peakPower",
+    name: "peakPower",
+    meta: { title: "主表数据"},
+    component: () => import("../views/PeakPower")
   }
 ];
 
