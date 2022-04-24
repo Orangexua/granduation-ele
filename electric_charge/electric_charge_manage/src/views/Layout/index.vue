@@ -3,7 +3,7 @@
     <el-container style="width: 100%; height: 100%">
       <el-header style="display: flex; justify-content: space-between">
         <div class="div1" style="width: 200px;height: 100%;">
-          <img src="../../assets/1.jpg" alt="handsome" style="width: 100%; height: 100%">
+          <img src="../../assets/2.png" alt="handsome" style="width: 100%; height: 100%">
         </div> 
         <h1 style="font-size:30px;color:#E5EAE9">电力计量计费管理系统</h1>
         <h4 @click="logout" style="cursor: pointer;margin-right:10px;color:#E5EAE9">{{nowDate}}  {{nowTime}}  {{nowWeek}}|退出登录</h4>

@@ -1,22 +1,36 @@
 <template>
   <div class="pay">
     <div v-if="userInfo.role === 0">
-      <el-button type="primary" @click="dialogFormVisible = true">
-        充值
-      </el-button>
-      <div v-for="item in list" :key="item.id">
-        <h1 style="margin: 50px 0">{{ item.name }}电费剩余</h1>
+      <div v-for="item in list" :key="item.id" style="float:left;margin-right:150px;height:200px;width:200px">
+        <h1 style="margin: 10px auto" align="center">{{ item.name }}</h1>
         <el-progress
-          :text-inside="true"
-          :stroke-width="26"
+          type="circle"
           :percentage="
             (1 - item.electric_use / item.electric_total).toFixed(2) * 100
           "
         ></el-progress>
-      </div>
+      <div class="pay_1">
+      已使用电量：<el-tag type="danger">{{item.electric_use}}</el-tag>
     </div>
-    
-    <el-table v-else :data="tableData" style="width: 100%">
+    <div style="margin-top:5px" class="price">
+      总共电量：<el-tag type="danger">{{item.electric_total}}</el-tag>
+    </div>
+    <el-button type="primary" @click="dialogFormVisible = true" style="margin:20px">
+        充值
+      </el-button>
+      </div>
+
+    </div>
+    <div v-else>
+      <el-form :inline="true" :model="form1" class="demo-form-inline">
+      <el-form-item label="用户手机号">
+        <el-input v-model="form1.phone" placeholder="请输入用户手机号"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="onSubmit">查询</el-button>
+      </el-form-item>
+    </el-form>
+    <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="id" label="id"> </el-table-column>
       <el-table-column prop="name" label="设备名称"></el-table-column>
       <el-table-column prop="username" label="所属用户"> </el-table-column>
@@ -39,6 +53,16 @@
         </template>
       </el-table-column>
     </el-table>
+    <div style="float:right;margin-top:10px">
+      <el-pagination
+        layout="prev, pager, next"
+        @current-change="pageChange"
+        :page-size="10"
+        :total="total"
+      >
+      </el-pagination>
+    </div>
+    </div>
     <el-dialog title="充值缴费" :visible.sync="dialogFormVisible">
       <el-form :model="form" :rules="formRules" ref="payForm">
         <el-form-item label="充值金额" prop="payPrice" :label-width="'120px'">
@@ -74,15 +98,6 @@
         <el-button type="primary" @click="handleSubmit"> 确 定 </el-button>
       </div>
     </el-dialog>
-    <div style="float:right;margin-top:10px">
-      <el-pagination
-        layout="prev, pager, next"
-        @current-change="pageChange"
-        :page-size="10"
-        :total="total"
-      >
-      </el-pagination>
-    </div>
   </div>
 </template>
 
@@ -97,6 +112,9 @@ export default {
         id: undefined,
         payPrice: "",
         unitPrice: ""
+      },
+      form1:{
+        phone: ""
       },
       formRules: {
         payPrice: [
@@ -141,6 +159,19 @@ export default {
         this.form.unitPrice = res.data.unitPrice;
       });
     },
+    onSubmit() {
+      this.getSearchList()
+    },
+    // getSearchList(){
+    //   getEquipment({
+    //     page: this.page,
+    //     pageSize: this.pageSize,
+    //     ...this.form1
+    //   }).then((res) => {
+    //     this.total = res.data.total;
+    //     this.tableData = res.data.list;
+    //   });
+    // },
     getList() {
       getUserEquipment().then((res) => {
         this.list = res.data.list;
@@ -182,4 +213,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.pay_1{
+  margin-top:10px
+}
+</style>
