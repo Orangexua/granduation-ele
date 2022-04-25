@@ -1,6 +1,13 @@
 <template>
   <div class="group">
-    <el-form :inline="true" :model="form" class="demo-form-inline">
+    <!-- 面包屑导航区域 -->
+    <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom:10px">
+        <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>设备管理</el-breadcrumb-item>
+        <el-breadcrumb-item>新增设备</el-breadcrumb-item>   
+    </el-breadcrumb>
+    <el-card>
+          <el-form :inline="true" :model="form" class="demo-form-inline">
       <el-form-item label="设备名称">
         <el-input v-model="form.name" placeholder="请输入设备名称"></el-input>
       </el-form-item>
@@ -47,6 +54,7 @@
       >
       </el-pagination>
     </div>
+    </el-card>
     <el-dialog
       :title="dialogType === 'add' ? '新增设备' : '修改设备'"
       :visible.sync="dialogFormVisible"

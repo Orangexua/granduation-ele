@@ -1,18 +1,26 @@
 <template>
   <div class="layout">
-    <el-container style="width: 100%; height: 100%">
-      <el-header style="display: flex; justify-content: space-between">
-        <div class="div1" style="width: 200px;height: 100%;">
-          <img src="../../assets/2.png" alt="handsome" style="width: 100%; height: 100%">
-        </div> 
-        <h1 style="font-size:30px;color:#E5EAE9">电力计量计费管理系统</h1>
-        <h4 @click="logout" style="cursor: pointer;margin-right:10px;color:#E5EAE9">{{nowDate}}  {{nowTime}}  {{nowWeek}}|退出登录</h4>
+    <el-container style="height: 100%">
+      <!-- 导航头区域 -->
+      <el-header>
+        <!-- <div class="div1" style="width: 200px;height: 100%;">
+          <img src="../../assets/1.jpg" alt="handsome" style="width: 100%; height: 100%">
+        </div>  -->
+        <div>
+            <img src="../../assets/logo.png" alt="" class="one">
+            <span>电力计量计费管理系统</span>  
+          </div>
+        <!-- <h1 style="font-size:30px;color:#E5EAE9">电力计量计费管理系统</h1> -->
+        <h4 style="cursor: pointer;margin-right:10px;color:#E5EAE9">{{nowDate}}  {{nowTime}}  {{nowWeek}}</h4>
+        <el-button type="info" @click="logout">退出</el-button>
       </el-header>
       <el-container>
-        <el-aside width="220px">
+        <!-- 侧边栏区域 -->
+        <el-aside style="width:200px">
+          <div class="toggle-button">|||</div>
           <Menu />
         </el-aside>
-        <el-main>
+        <el-main >
           <router-view />
         </el-main>
       </el-container>
@@ -33,7 +41,9 @@ export default {
 		timer: null,    
 		nowWeek: '',    
 		nowDate: '',    
-		nowTime: ''  
+		nowTime: '',
+    // 是否折叠
+    isCollapse: false,
 	  }
   },
   mounted() {
@@ -50,6 +60,10 @@ export default {
         this.$store.dispatch("getUserInfo", res.data);
         window.location.reload();
       });
+    },
+    // 点击按钮切换菜单折叠和展开
+    toggleCollapse() {
+      this.isCollapse =! this.isCollapse
     },
     logout() {
       removeStore("token");
@@ -80,14 +94,46 @@ export default {
   width: 100vw;
   height: 100vh;
 }
-.el-header {
-  background-color: #162D3A;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  padding: 0 0;
-}
+ .el-header {
+    background-color: #373d41;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0;
+    align-items: center;
+    color: #fff;
+    font-size: 20px;
+    > div {
+      display: flex;
+      align-items: center;
+      span {
+        margin-left: 15px;
+      }
+    }
+  }
+  .el-aside {
+    background-color: #333744;
+    height: 661px;
+    .el-menu {
+      border-right: none;
+    }
+  }
+  .el-main {
+    background-color: #eaedf1;
+  }
+  .toggle-button {
+    background-color: #4a5064;
+    font-size: 10px;
+    line-height: 24px;
+    color: #fff;
+    text-align: center;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+  }
 .time {
   height: 20px;
 }
+.one {
+    height: 40px;
+    width: 40px;
+  }
 </style>

@@ -1,6 +1,13 @@
 <template>
   <div id="main">
-    <div id="app-one">
+    <!-- 面包屑导航区域 -->
+    <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom:10px">
+        <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>总表计量</el-breadcrumb-item>
+        <!-- <el-breadcrumb-item>新增设备</el-breadcrumb-item>    -->
+    </el-breadcrumb>
+    <el-card>
+      <div id="app-one">
     </div>
     <div id="app-two">
     </div>
@@ -8,6 +15,7 @@
     </div>
     <div id="app-four">
     </div>
+    </el-card>
   </div>
 </template>
 
@@ -180,11 +188,11 @@ export default{
   left: 0;
   #app-one , #app-two , #app-three , #app-four{
     display: inline-block;
-    width: 350px;
-    height: 350px;
+    width: 300px;
+    height: 300px;
     top: 0;
-    left: 0;
-    margin: 0 115px;
+    left: 90px;
+    margin: 10px 119px;
     border: 1px solid rgb(143, 139, 139);
     border-radius: 20%;
     > .dia {

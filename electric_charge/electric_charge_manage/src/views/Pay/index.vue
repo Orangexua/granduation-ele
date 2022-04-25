@@ -1,8 +1,14 @@
 <template>
   <div class="pay">
     <div v-if="userInfo.role === 0">
-      <div v-for="item in list" :key="item.id" style="float:left;margin-right:150px;height:200px;width:200px">
-        <h1 style="margin: 10px auto" align="center">{{ item.name }}</h1>
+       <!-- 面包屑导航区域 -->
+     <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom:10px">
+        <el-breadcrumb-item :to="{ path: '/pay' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>用户缴费</el-breadcrumb-item> 
+      </el-breadcrumb>
+      <el-card style="height:500px">
+        <div v-for="item in list" :key="item.id" style="float:left;margin-right:150px;height:200px;width:200px">
+        <h1 style="margin: 10px 0px 10px 30px">{{ item.name }}</h1>
         <el-progress
           type="circle"
           :percentage="
@@ -19,9 +25,16 @@
         充值
       </el-button>
       </div>
+      </el-card>
 
     </div>
     <div v-else>
+      <!-- 面包屑导航区域 -->
+     <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom:10px">
+        <el-breadcrumb-item :to="{ path: '/pay' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>用户缴费</el-breadcrumb-item> 
+      </el-breadcrumb>
+    <el-card>
       <el-form :inline="true" :model="form1" class="demo-form-inline">
       <el-form-item label="用户手机号">
         <el-input v-model="form1.phone" placeholder="请输入用户手机号"></el-input>
@@ -62,6 +75,7 @@
       >
       </el-pagination>
     </div>
+    </el-card>
     </div>
     <el-dialog title="充值缴费" :visible.sync="dialogFormVisible">
       <el-form :model="form" :rules="formRules" ref="payForm">

@@ -5,7 +5,7 @@
     class="el-menu-vertical-demo"
     @open="handleOpen"
     @close="handleClose"
-    background-color="#182E38"
+    background-color="#333744"
     text-color="#fff"
     active-text-color="#ffd04b"
     router

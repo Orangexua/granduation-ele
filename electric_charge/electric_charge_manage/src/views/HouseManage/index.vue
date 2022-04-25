@@ -1,14 +1,21 @@
 <template>
   <div class="houseManage">
+     <!-- 面包屑导航区域 -->
+     <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom:10px">
+        <el-breadcrumb-item :to="{ path: '/pay' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>房源管理</el-breadcrumb-item>
+        <el-breadcrumb-item>房源列表</el-breadcrumb-item>   
+    </el-breadcrumb>
+    <el-card> 
     <el-form :inline="true" :model="form" class="demo-form-inline">
-      <el-form-item label="小区名字">
+      <el-form-item label="小区名称：">
         <el-input v-model="form.name" placeholder="请输入小区名字"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">查询</el-button>
       </el-form-item>
     </el-form>
-    <el-button type="primary" @click="openModal">新增房源</el-button>
+    <el-button type="primary" @click="openModal" style="margin-bottom:20px">新增房源</el-button>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="id" label="id" width="180"> </el-table-column>
       <el-table-column prop="name" label="小区名称"> </el-table-column>
@@ -39,6 +46,7 @@
       >
       </el-pagination>
     </div>
+    </el-card>
     <el-dialog
       :title="dialogType === 'add' ? '新增房源' : '修改房源'"
       :visible.sync="dialogFormVisible"

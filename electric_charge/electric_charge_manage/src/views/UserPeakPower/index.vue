@@ -1,6 +1,15 @@
 <template>
   <div id="user">
-    <div id="main" class="btn draw-outline"></div>
+    <!-- 面包屑导航区域 -->
+    <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom:10px">
+        <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>日用电量</el-breadcrumb-item>
+        <!-- <el-breadcrumb-item>新增设备</el-breadcrumb-item>    -->
+    </el-breadcrumb>
+    <el-card>
+      <div id="main" class="btn draw-outline"></div>
+    </el-card>
+    
   </div>
 </template>
 
@@ -152,11 +161,11 @@ export default {
   height: 100%;
   top: 0;
   left: 0;
-  border: 1px solid #000;
+  // border: 1px solid #000;
   #main {
     width: 800px;
-    height: 600px;
-    margin-top: 100px ;
+    height: 500px;
+    margin-top: 1px ;
     margin-left: 180px ;
   }
   .draw-outline {

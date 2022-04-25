@@ -1,6 +1,13 @@
 <template>
   <div class="userBill">
-    <el-form :inline="true" :model="form" class="demo-form-inline">
+    <!-- 面包屑导航区域 -->
+    <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom:10px">
+        <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>费用统计</el-breadcrumb-item>
+        <el-breadcrumb-item>用户账单</el-breadcrumb-item>   
+    </el-breadcrumb>
+    <el-card>
+      <el-form :inline="true" :model="form" class="demo-form-inline">
       <el-form-item label="订单编号">
         <el-input
           v-model="form.orderNum"
@@ -37,6 +44,7 @@
       >
       </el-pagination>
     </div>
+    </el-card>
   </div>
 </template>
 

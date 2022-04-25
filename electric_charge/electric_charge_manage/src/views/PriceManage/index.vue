@@ -1,6 +1,13 @@
 <template>
   <div class="pricemanage">
-    <div class="price">
+    <!-- 面包屑导航区域 -->
+    <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom:10px">
+        <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item>价格管理</el-breadcrumb-item>
+        <el-breadcrumb-item>价格设置</el-breadcrumb-item>   
+    </el-breadcrumb>
+    <el-card>
+      <div class="price">
       目前新用户电费价格：<el-tag type="danger">{{this.newPrice1}}</el-tag>
     </div>
     <div style="margin-top:5px" class="price">
@@ -30,7 +37,7 @@
       <h5>1.由于新用户有优惠活动，所以新用户价格设置不可高于老用户</h5>
       <h5>2.注册七天以内的算新用户，七天以外的算老用户</h5>
       <h5>3.管理员更改电费价格需仔细评判不同用户，根据企业方案进行价格配置</h5>
-    </div>  
+    </div></el-card>  
   </div>
 </template>
 
