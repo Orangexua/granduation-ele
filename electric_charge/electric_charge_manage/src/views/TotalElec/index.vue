@@ -36,10 +36,6 @@ export default{
   },
   created: function(){
     console.log(this.numberfour)
-    setInterval(function(){
-      this.numberfour =  Math.round(Math.random()*(100-80)+80);
-      console.log(this.numberfour)
-    },1000)
   },
   mounted() {
     this.toolTipOne(),
