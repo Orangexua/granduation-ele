@@ -1,6 +1,16 @@
 <template>
   <div id="user">
-    <div id="main" class="btn draw-outline"></div>
+    <div id="main"></div>
+    <div id="sun"></div>
+    <div class="message">
+      <div class="price" style="margin:40px 0 0 60px">
+        <h4 style="color:#F7170F">详情请注意：</h4>
+        <h5>1.电表峰值详情，展示为昨日24小时的电量详情</h5>
+        <h5>2.电表用量详情，对展示服务区域整体的电表使用情况，进行汇总</h5>
+        <h5>3.今日的电量详情需在本日的24时进行更新</h5>
+        <h5>4.峰值详情图表可下载</h5>
+      </div> 
+    </div>
   </div>
 </template>
 
@@ -18,6 +28,9 @@ import {
 import { LineChart } from 'echarts/charts';
 import { UniversalTransition } from 'echarts/features';
 import { CanvasRenderer } from 'echarts/renderers';
+import { getStore } from "../../utils/storage";
+let userInfo = JSON.parse(getStore("userInfo"));
+
 export default {
   data() {
     return {
@@ -25,7 +38,8 @@ export default {
     }
   },
   mounted() {
-    this.toolPeakPower();
+    this.changeMessage();
+    console.log(userInfo)
   },
   methods: {
     toolPeakPower() {
@@ -140,6 +154,378 @@ export default {
         ]
       };
       option && myChart.setOption(option);
+    },
+    toolSunburst() {
+      var chartDom = document.getElementById('sun');
+      var myChart = echarts.init(chartDom);
+      var option;
+      option = {
+        silent: true,
+        series: [
+          {
+            radius: ['15%', '80%'],
+            type: 'sunburst',
+            sort: undefined,
+            emphasis: {
+              focus: 'ancestor'
+            },
+            data: [
+              {
+                value: 8,
+                children: [
+                  {
+                    value: 4,
+                    children: [
+                      {
+                        value: 2
+                      },
+                      {
+                        value: 1
+                      },
+                      {
+                        value: 1
+                      },
+                      {
+                        value: 0.5
+                      }
+                    ]
+                  },
+                  {
+                    value: 2
+                  }
+                ]
+              },
+              {
+                value: 4,
+                children: [
+                  {
+                    children: [
+                      {
+                        value: 2
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                value: 4,
+                children: [
+                  {
+                    children: [
+                      {
+                        value: 2
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                value: 3,
+                children: [
+                  {
+                    children: [
+                      {
+                        value: 1
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            label: {
+              color: '#000',
+              textBorderColor: '#fff',
+              textBorderWidth: 2,
+              formatter: function (param) {
+                var depth = param.treePathInfo.length;
+                if (depth === 2) {
+                  return '总表';
+                } else if (depth === 3) {
+                  return '副表';
+                } else if (depth === 4) {
+                  return '区域表';
+                }
+                return '';
+              }
+            },
+            levels: [
+              {},
+              {
+                itemStyle: {
+                  color: '#CD4949'
+                },
+                label: {
+                  rotate: 'radial'
+                }
+              },
+              {
+                itemStyle: {
+                  color: '#F47251'
+                },
+                label: {
+                  rotate: 'tangential'
+                }
+              },
+              {
+                itemStyle: {
+                  color: '#FFC75F'
+                },
+                label: {
+                  rotate: 0
+                }
+              }
+            ]
+          }
+        ]
+      };
+      option && myChart.setOption(option);
+    },
+    toolUserPeakPower() {
+      echarts.use([
+        TitleComponent,
+        ToolboxComponent,
+        TooltipComponent,
+        GridComponent,
+        VisualMapComponent,
+        MarkAreaComponent,
+        LineChart,
+        CanvasRenderer,
+        UniversalTransition
+      ]);
+      var chartDom = document.getElementById('main');
+      var myChart = echarts.init(chartDom);
+      var option;
+      option = {
+        title: {
+          text: '用户昨日电量详情',
+          subtext: '数据/kwh'
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross'
+          }
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            saveAsImage: {}
+          }
+        },
+        xAxis: {
+          type: 'category',
+          boundaryGap: false,
+          // prettier-ignore
+          data: ['00:00', '01:15', '02:30', '03:45', '05:00', '06:15', '07:30', '08:45', '10:00', '11:15', '12:30', '13:45', '15:00', '16:15', '17:30', '18:45', '20:00', '21:15', '22:30', '23:45']
+        },
+        yAxis: {
+          type: 'value',
+          axisLabel: {
+            formatter: '{value} W'
+          },
+          axisPointer: {
+            snap: true
+          }
+        },
+        visualMap: {
+          show: false,
+          dimension: 0,
+          pieces: [
+            {
+              lte: 6,
+              color: 'green'
+            },
+            {
+              gt: 6,
+              lte: 8,
+              color: 'red'
+            },
+            {
+              gt: 8,
+              lte: 14,
+              color: 'green'
+            },
+            {
+              gt: 14,
+              lte: 17,
+              color: 'red'
+            },
+            {
+              gt: 17,
+              color: 'green'
+            }
+          ]
+        },
+        series: [
+          {
+            name: 'Electricity',
+            type: 'line',
+            smooth: true,
+            // prettier-ignore
+            data: [300, 280, 250, 260, 270, 300, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400],
+            markArea: {
+              itemStyle: {
+                color: 'rgba(#182d38, 0.4)'
+              },
+              data: [
+                [
+                  {
+                    name: '早峰谷',
+                    xAxis: '07:30'
+                  },
+                  {
+                    xAxis: '10:00'
+                  }
+                ],
+                [
+                  {
+                    name: '晚峰谷',
+                    xAxis: '17:30'
+                  },
+                  {
+                    xAxis: '21:15'
+                  }
+                ]
+              ]
+            }
+          }
+        ]
+      };
+      option && myChart.setOption(option);
+    },
+    toolUserSunburst() {
+      var chartDom = document.getElementById('sun');
+      var myChart = echarts.init(chartDom);
+      var option;
+      option = {
+        silent: true,
+        series: [
+          {
+            radius: ['15%', '80%'],
+            type: 'sunburst',
+            sort: undefined,
+            emphasis: {
+              focus: 'ancestor'
+            },
+            data: [
+              {
+                value: 8,
+                children: [
+                  {
+                    value: 4,
+                    children: [
+                      {
+                        value: 2
+                      },
+                      {
+                        value: 1
+                      },
+                      {
+                        value: 1
+                      },
+                      {
+                        value: 0.5
+                      }
+                    ]
+                  },
+                  {
+                    value: 2
+                  }
+                ]
+              },
+              {
+                value: 4,
+                children: [
+                  {
+                    children: [
+                      {
+                        value: 2
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                value: 4,
+                children: [
+                  {
+                    children: [
+                      {
+                        value: 2
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                value: 3,
+                children: [
+                  {
+                    children: [
+                      {
+                        value: 1
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            label: {
+              color: '#000',
+              textBorderColor: '#fff',
+              textBorderWidth: 2,
+              formatter: function (param) {
+                var depth = param.treePathInfo.length;
+                if (depth === 2) {
+                  return '房源表';
+                } else if (depth === 3) {
+                  return '副表';
+                } else if (depth === 4) {
+                  return '设备表';
+                }
+                return '';
+              }
+            },
+            levels: [
+              {},
+              {
+                itemStyle: {
+                  color: '#CD4949'
+                },
+                label: {
+                  rotate: 'radial'
+                }
+              },
+              {
+                itemStyle: {
+                  color: '#F47251'
+                },
+                label: {
+                  rotate: 'tangential'
+                }
+              },
+              {
+                itemStyle: {
+                  color: '#FFC75F'
+                },
+                label: {
+                  rotate: 0
+                }
+              }
+            ]
+          }
+        ]
+      };
+      option && myChart.setOption(option);
+    },
+    changeMessage() {
+      if (userInfo && userInfo.role === 1) {
+        this.toolPeakPower();
+        this.toolSunburst()
+      }else {
+        this.toolUserPeakPower();
+        this.toolUserSunburst();
+      }
     }
   }
 }
@@ -152,75 +538,18 @@ export default {
   height: 100%;
   top: 0;
   left: 0;
-  border: 1px solid #000;
   #main {
-    width: 800px;
-    height: 600px;
-    margin-top: 100px ;
-    margin-left: 180px ;
+    width: 600px;
+    height: 460px;
+    margin: 80px 0 0 30px;
   }
-  .draw-outline {
-    box-shadow: inset 0 0 0 4px #dfebeb;
-    color: #dfebeb;
-    -webkit-transition: color 0.25s 0.125s;
-    transition: color 0.25s 0.125s;
-    position: relative;
-  }
-  .draw-outline::before, .draw-outline::after {
-    border: 0 solid transparent;
-    box-sizing: border-box;
-    content: '';
-    pointer-events: none;
+  #sun {
     position: absolute;
-    width: 0;
-    height: 0;
-  }
-  .draw-outline::before {
-    top: 0;
-    right: 0;
-  }
-  .draw-outline::after {
-    left: 0;
-    bottom: 0;
-  }
-  .draw-outline::after {
-    border-top-width: 4px;
-    border-left-width: 4px;
-  }
-  .draw-outline::before {
-    border-bottom-width: 4px;
-    border-right-width: 4px;
-  }
-  .draw-outline:hover {
-    color: #2b1880;
-  }
-  .draw-outline:hover::before, .draw-outline:hover::after {
-    border-color: #151f58;
-    -webkit-transition: border-color 0s, height 0.25s, width 0.25s;
-    transition: border-color 0s, height 0.25s, width 0.25s;
-    width: 100%;
-    height: 100%;
-  }
-  .draw-outline:hover::before {
-    -webkit-transition-delay: 0s, 0s, 0.25s;
-            transition-delay: 0s, 0s, 0.25s;
-  }
-  .draw-outline:hover::after {
-    -webkit-transition-delay: 0.5s, 0.5s, 0.75s;
-            transition-delay: 0.5s, 0.5s, 0.75s;
-  }
-
-  .btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    line-height: 1.5;
-    font: 700 1.2rem 'Roboto Slab', sans-serif;
-    padding: 1em 2em;
-    letter-spacing: 0.05rem;
-  }
-  .btn:focus {
-    outline: 2px dotted #071e5c;
+    width: 500px;
+    height: 460px;
+    top: 60px;
+    right: 40px;
+    margin-top: 100px;
   }
 }
 </style>
