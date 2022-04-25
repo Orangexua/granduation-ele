@@ -1,15 +1,22 @@
 <template>
   <div id="user">
-    <!-- 面包屑导航区域 -->
     <el-breadcrumb separator-class="el-icon-arrow-right" style="margin-bottom:10px">
-        <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>日用电量</el-breadcrumb-item>
-        <!-- <el-breadcrumb-item>新增设备</el-breadcrumb-item>    -->
     </el-breadcrumb>
     <el-card>
-      <div id="main" class="btn draw-outline"></div>
+      <div id="main"></div>
+      <div id="sun"></div>
+      <div class="message">
+        <div class="price" style="margin:30px 0 0 60px">
+          <h4 style="color:#F7170F">详情请注意：</h4>
+          <h5>1.电表峰值详情，展示为昨日24小时的电量详情</h5>
+          <h5>2.电表用量详情，对展示服务区域整体的电表使用情况，进行汇总</h5>
+          <h5>3.今日的电量详情需在本日的24时进行更新</h5>
+          <h5>4.峰值详情图表可下载</h5>
+        </div> 
+      </div>
     </el-card>
-    
   </div>
 </template>
 
@@ -537,19 +544,10 @@ export default {
   height: 100%;
   top: 0;
   left: 0;
-  // border: 1px solid #000;
   #main {
-    width: 800px;
-    height: 500px;
-    margin-top: 1px ;
-    margin-left: 180px ;
-  }
-  .draw-outline {
-    box-shadow: inset 0 0 0 4px #dfebeb;
-    color: #dfebeb;
-    -webkit-transition: color 0.25s 0.125s;
-    transition: color 0.25s 0.125s;
-    position: relative;
+    width: 600px;
+    height: 460px;
+    margin: 40px 0 0 30px;
   }
   #sun {
     position: absolute;
