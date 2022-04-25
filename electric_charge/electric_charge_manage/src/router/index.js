@@ -28,7 +28,7 @@ export const routerMap = [
   {
     path: "/totalElec",
     name: "TotalElec",
-    meta: { title: "电表计量"},
+    meta: { title: "总表计量"},
     component: () => import("../views/TotalElec")
   },
   {
@@ -60,6 +60,12 @@ export let routersList = [
         component: () => import("../views/Bill/UserBill")
       }
     ]
+  },
+  {
+    path: "/userpeakpower",
+    name: "userpeakpower",
+    meta: { title: "日用电量" },
+    component: () => import("../views/UserPeakPower")
   }
 ];
 

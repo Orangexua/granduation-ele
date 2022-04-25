@@ -81,6 +81,7 @@
               style="margin-right: 20px"
               type="primary"
               @click="submitForm('ruleForm')"
+              class="btn draw-outline"
             >
               注册
             </el-button>

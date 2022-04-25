@@ -167,12 +167,7 @@ export default{
         ]};
       option && myChart.setOption(option);
     }
-  },
-  watch:{
-    numberfour: function() {
-      this.toolTipFour()
-    }
-  },
+  }
 }
 
 </script>
