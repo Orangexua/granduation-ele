@@ -65,7 +65,7 @@ export default {
       var option;
       option = {
         title: {
-          text: '昨日电量详情',
+          text: '总表昨日电量详情',
           subtext: '数据/kwh'
         },
         tooltip: {
@@ -130,7 +130,7 @@ export default {
             type: 'line',
             smooth: true,
             // prettier-ignore
-            data: [300, 280, 250, 260, 270, 300, 550, 500, 400, 390, 380, 390, 400, 500, 600, 750, 800, 700, 600, 400],
+            data: [400, 380, 150, 60, 70, 100, 450, 500, 400, 190, 80, 96, 75, 100, 240, 750, 800, 700, 400, 200],
             markArea: {
               itemStyle: {
                 color: 'rgba(#182d38, 0.4)'

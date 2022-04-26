@@ -6,8 +6,25 @@
         <el-breadcrumb-item>总表计量</el-breadcrumb-item>
         <!-- <el-breadcrumb-item>新增设备</el-breadcrumb-item>    -->
     </el-breadcrumb>
-    <el-card>
-      <div id="app-one">
+    <el-card style="" v-if="isreloadData">
+      <el-form :model="groupForm" :rules="groupFormRules" ref="groupForm">
+        <el-form-item
+            style="width: 400px"
+            label="选择用户"
+            prop="uid"
+            :label-width="'120px'"
+        >
+          <el-select v-model="groupForm.uid" placeholder="请选择用户" @change="selectChanged">
+            <el-option
+              v-for="item in userList"
+              :key="item.id"
+              :value="item.id"
+              :label="item.username"
+            />
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <div id="app-one" v-if="isreloadData">
       </div>
       <div id="app-two">
       </div>
@@ -24,6 +41,7 @@ import * as echarts from 'echarts/core';
 import { TooltipComponent } from 'echarts/components';
 import { FunnelChart, GaugeChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
+import { getUserList } from "@/api/user";
 
 export default{
   data() {
@@ -31,17 +49,35 @@ export default{
       numberone: 0,
       numbertwo: 0,
       numberthree: 0,
-      numberfour: 0
+      numberfour: 0,
+      tableData: [],
+      isreloadData: true,
+      form: {
+        name: "",
+        phone: ""
+      },
+      groupForm: {
+        name: "",
+        electric_total: 0,
+        uid: undefined
+      },
+      groupFormRules: {
+        uid: [{ required: true, message: "请选择用户", trigger: "blur" }]
+      },
+      dialogFormVisible: false,
+      total: 0,
+      page: 1,
+      pageSize: 10,
+      userList: [],
+      dialogType: "add"
     }
-  },
-  created: function(){
-    console.log(this.numberfour)
   },
   mounted() {
     this.toolTipOne(),
     this.toolTipTwo(),
     this.toolTipThree(),
-    this.toolTipFour()
+    this.toolTipFour(),
+    this.getUser()
   },
   methods: {
     realtime(m, n) {
@@ -71,7 +107,7 @@ export default{
             data: [
               {
                 value: this.numberone,
-                name: '上月结余/千元'
+                name: '上月结余'
               }
             ]
           }
@@ -102,7 +138,7 @@ export default{
             data: [
               {
                 value: this.numbertwo,
-                name: '使用户数/百户'
+                name: '使用户数'
               }
             ]
           }
@@ -133,7 +169,7 @@ export default{
             data: [
               {
                 value: this.numberthree,
-                name: '电量存余kw/h'
+                name: '电量存余'
               }
             ]
           }
@@ -164,12 +200,29 @@ export default{
             data: [
               {
                 value: this.numberfour,
-                name: '实时耗电Kw/h'
+                name: '实时耗电'
               }
             ]
           }
         ]};
       option && myChart.setOption(option);
+    },
+    getUser() {
+      getUserList().then((res) => {
+        this.userList = res.data.list;
+        console.log(this.userList);
+      });
+    },
+    selectChanged() {
+      this.numberfour = Math.round(Math.random()*(100-80)+80);
+      this.numberthree= Math.round(Math.random()*(100-80)+80);
+      this.numbertwo = Math.round(Math.random()*(100-80)+80);
+      this.numberone = Math.round(Math.random()*(100-80)+80);
+      this.toolTipOne(),
+      this.toolTipTwo(),
+      this.toolTipThree(),
+      this.toolTipFour(),
+      console.log('sdsdc', this.numberfour);
     }
   }
 }
@@ -184,13 +237,13 @@ export default{
   left: 0;
   #app-one , #app-two , #app-three , #app-four{
     display: inline-block;
-    width: 300px;
-    height: 300px;
+    width: 270px;
+    height: 270px;
     top: 0;
-    left: 90px;
-    margin: 0 90px;
-    border: 1px solid rgb(143, 139, 139);
-    border-radius: 20%;
+    left: 140px;
+    margin: 0 80px;
+    border: 3px solid #5370C6;
+    border-radius: 35%;
     > .dia {
       width: 0px;
       height: 0px;
