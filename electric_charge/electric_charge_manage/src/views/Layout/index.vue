@@ -16,7 +16,7 @@
       </el-header>
       <el-container>
         <!-- 侧边栏区域 -->
-        <el-aside style="width:230px; height: 100%;">
+        <el-aside style="width:200px; height: 100%;">
           <div class="toggle-button">|||</div>
           <Menu />
         </el-aside>
