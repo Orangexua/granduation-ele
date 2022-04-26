@@ -41,13 +41,13 @@
         <div v-if="type === 'login'">
           <el-form-item style="">
             <el-button
-              style="margin-right: 20px"
+              style="margin: 0 20px 0 40px"
               type="primary"
               @click="submitForm('ruleForm')"
             >
               登录
             </el-button>
-            <el-link type="primary" @click="type = 'register'"> 注册 </el-link>
+            <el-button type="success" plain @click="type = 'register'"> 注册 </el-button>
           </el-form-item>
         </div>
         <div v-else>
@@ -200,5 +200,9 @@ export default {
     margin-left: 18px;
     margin-bottom: 30px;
   }
+}
+.box-card{
+  // background-color: red;
+  // background-color: rgba(234, 235, 236, 0.8)
 }
 </style>
