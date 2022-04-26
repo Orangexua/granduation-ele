@@ -68,7 +68,7 @@
     </el-table>
     <div style="float:right;margin-top:10px">
       <el-pagination
-        layout="prev, pager, next"
+        layout="total, prev, pager, next"
         @current-change="pageChange"
         :page-size="10"
         :total="total"

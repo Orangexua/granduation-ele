@@ -39,7 +39,7 @@
     </el-table>
     <div style="display: flex; flex-direction: row-reverse">
       <el-pagination
-        layout="prev, pager, next"
+        layout="total, prev, pager, next"
         @current-change="pageChange"
         :page-size="pageSize"
         :total="total"
