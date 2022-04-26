@@ -240,16 +240,10 @@ export default{
     width: 270px;
     height: 270px;
     top: 0;
-    left: 140px;
+    left: 120px;
     margin: 0 80px;
     border: 3px solid #5370C6;
     border-radius: 35%;
-    > .dia {
-      width: 0px;
-      height: 0px;
-      border: 10px solid #000;
-      border-radius: 50%;
-    }
   }
 }
 </style>
